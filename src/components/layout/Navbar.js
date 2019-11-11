@@ -4,7 +4,9 @@ class Navbar extends Component {
   render() {
     return (
       <nav className="navbar bg-primary">
-        <h1>Navbar</h1>
+        <h1>
+          <i className="fab fa-github" /> {this.props.title}
+        </h1>
       </nav>
     )
   }
