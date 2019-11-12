@@ -21,13 +21,23 @@ class App extends Component {
       )
   }
 
-  render() {
+  // Search Github users
+  searchUsers = (text) => {
+    fetch(`https://api.github.com/search/users?q=${text}&
+    client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&
+    client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
+      .then(res => res.json())
+      .then(data => this.setState({ users: data.items })
+      )
+    }
+    
+    render() {
 
     return (
       <div className="App">
       <Navbar />
       <div className="container">
-        <Search />
+        <Search searchUsers={this.searchUsers} />
         <Users loading={this.state.loading} users={this.state.users} />
       </div>
       </div>
