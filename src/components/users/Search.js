@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class Search extends Component {
   state = {
     text: ''
+  }
+
+  static propTypes = {
+    searchUsers: PropTypes.func.isRequired
   }
   
   handleChange = (e) => this.setState({ text: e.target.value})
