@@ -23,11 +23,13 @@ class App extends Component {
 
   // Search Github users
   searchUsers = (text) => {
+    this.setState({ loading: true })
+
     fetch(`https://api.github.com/search/users?q=${text}&
     client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&
     client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
       .then(res => res.json())
-      .then(data => this.setState({ users: data.items })
+      .then(data => this.setState({ users: data.items, loading: false })
       )
     }
     
