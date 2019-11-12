@@ -10,17 +10,6 @@ class App extends Component {
     loading: false
   }
 
-  componentDidMount() {
-    this.setState({ loading: true })
-
-    fetch(`https://api.github.com/users?
-    client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&
-    client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
-      .then(res => res.json())
-      .then(data => this.setState({ users: data, loading: false })
-      )
-  }
-
   // Search Github users
   searchUsers = (text) => {
     this.setState({ loading: true })
@@ -32,6 +21,10 @@ class App extends Component {
       .then(data => this.setState({ users: data.items, loading: false })
       )
     }
+
+    clearUsers = () => {
+      this.setState({ users: [], loading: false })
+    }
     
     render() {
 
@@ -39,7 +32,10 @@ class App extends Component {
       <div className="App">
       <Navbar />
       <div className="container">
-        <Search searchUsers={this.searchUsers} />
+        <Search 
+          searchUsers={this.searchUsers} 
+          clearUsers={this.clearUsers} 
+          showClear={this.state.users.length > 0 ? true : false} />
         <Users loading={this.state.loading} users={this.state.users} />
       </div>
       </div>
